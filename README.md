@@ -1,2 +1,4 @@
-# azure-dns-private-resolver-vwan
-Azure Private DNS Resolver in Azure vWAN infrastructure
+# Azure DNS Private Resolver in Azure vWAN vwan infrastrucure
+
+# Network topology
+![image](images/topology-vwan.svg)
