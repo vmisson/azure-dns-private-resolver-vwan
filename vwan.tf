@@ -51,7 +51,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic-setting" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log-analytics.id
   log_analytics_destination_type = "AzureDiagnostics"
 
-  log {
+  enabled_log {
     category_group = "allLogs"
   }
 
