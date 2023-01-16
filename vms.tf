@@ -8,7 +8,7 @@ resource "random_password" "password" {
 # VM1
 #######################################
 resource "azurerm_network_interface" "vm1-nic1" {
-  name                = "vm1-nic1-site1"
+  name                = "${var.vm1-name}-nic1-site1"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
 
@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "vm1-nic1" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm1" {
-  name                = "vm1"
+  name                = var.vm1-name
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
   size                = "Standard_DS1_v2"
@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "vm1" {
   ]
 
   os_disk {
-    name                 = "vm1-od01"
+    name                 = "v${var.vm1-name}-od01"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
     disk_size_gb         = 30
@@ -54,7 +54,7 @@ resource "azurerm_linux_virtual_machine" "vm1" {
 # VM2
 #######################################
 resource "azurerm_network_interface" "vm2-nic1" {
-  name                = "vm2-nic1-site1"
+  name                = "${var.vm2-name}-nic1-site1"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
 
@@ -66,7 +66,7 @@ resource "azurerm_network_interface" "vm2-nic1" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm2" {
-  name                = "vm2"
+  name                = var.vm2-name
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
   size                = "Standard_DS1_v2"
@@ -80,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "vm2" {
   ]
 
   os_disk {
-    name                 = "vm2-od01"
+    name                 = "${var.vm2-name}-od01"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
     disk_size_gb         = 30

@@ -92,17 +92,37 @@ resource "azurerm_private_dns_zone" "dns-zone-azure" {
   resource_group_name = azurerm_resource_group.resource_group.name
 }
 
-resource "azurerm_private_dns_a_record" "azure-record-1" {
-  name                = "test"
+resource "azurerm_private_dns_a_record" "azure-record-vm1" {
+  name                = var.vm1-name
   zone_name           = azurerm_private_dns_zone.dns-zone-azure.name
   resource_group_name = azurerm_resource_group.resource_group.name
   ttl                 = 60
-  records             = ["1.2.3.4"]
+  records             = [azurerm_network_interface.vm1-nic1.private_ip_address]
+}
+
+resource "azurerm_private_dns_a_record" "azure-record-vm2" {
+  name                = var.vm2-name
+  zone_name           = azurerm_private_dns_zone.dns-zone-azure.name
+  resource_group_name = azurerm_resource_group.resource_group.name
+  ttl                 = 60
+  records             = [azurerm_network_interface.vm2-nic1.private_ip_address]
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "virtual-network-link-azure-zone" {
   name                  = "link-azure-zone"
   resource_group_name   = azurerm_resource_group.resource_group.name
   private_dns_zone_name = azurerm_private_dns_zone.dns-zone-azure.name
+  virtual_network_id    = azurerm_virtual_network.dns-vnet.id
+}
+
+resource "azurerm_private_dns_zone" "privatelink-postgres-database-azure-com" {
+  name                = "privatelink.postgres.database.azure.com"
+  resource_group_name = azurerm_resource_group.resource_group.name
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_postgres_hub" {
+  name                  = "link-privatelink-postgres-database-azure-com"
+  resource_group_name   = azurerm_resource_group.resource_group.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink-postgres-database-azure-com.name
   virtual_network_id    = azurerm_virtual_network.dns-vnet.id
 }
