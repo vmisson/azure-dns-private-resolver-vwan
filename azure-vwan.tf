@@ -33,7 +33,7 @@ resource "azurerm_firewall_policy" "firewall-policy" {
 
   dns {
     proxy_enabled = true
-    servers = [azurerm_private_dns_resolver_inbound_endpoint.dns-inboundendpoint.ip_configurations[0].private_ip_address]
+    servers       = [azurerm_private_dns_resolver_inbound_endpoint.dns-inboundendpoint.ip_configurations[0].private_ip_address]
   }
 }
 
@@ -46,9 +46,9 @@ resource "azurerm_log_analytics_workspace" "log-analytics" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "diagnostic-setting" {
-  name               = "firewall-diagnostic-setting"
-  target_resource_id = azurerm_firewall.firewall.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.log-analytics.id
+  name                           = "firewall-diagnostic-setting"
+  target_resource_id             = azurerm_firewall.firewall.id
+  log_analytics_workspace_id     = azurerm_log_analytics_workspace.log-analytics.id
   log_analytics_destination_type = "AzureDiagnostics"
 
   enabled_log {

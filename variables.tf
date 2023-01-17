@@ -22,3 +22,8 @@ variable "vm2-name" {
   type    = string
   default = "vm2"
 }
+
+variable "vm3-name" {
+  type    = string
+  default = "vm-onprem"
+}

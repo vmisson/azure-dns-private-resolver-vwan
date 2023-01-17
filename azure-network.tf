@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet1" {
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
 
-  dns_servers = [ azurerm_firewall.firewall.virtual_hub[0].private_ip_address ]
+  dns_servers = [azurerm_firewall.firewall.virtual_hub[0].private_ip_address]
 }
 
 resource "azurerm_subnet" "vnet1-subnet" {
@@ -26,7 +26,7 @@ resource "azurerm_virtual_hub_connection" "vnet1-vhub-connection" {
   routing {
     associated_route_table_id = "${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/defaultRouteTable"
     propagated_route_table {
-      labels = ["none"]      
+      labels          = ["none"]
       route_table_ids = ["${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/noneRouteTable"]
     }
   }
@@ -41,7 +41,7 @@ resource "azurerm_virtual_network" "vnet2" {
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
 
-  dns_servers = [ azurerm_firewall.firewall.virtual_hub[0].private_ip_address ]
+  dns_servers = [azurerm_firewall.firewall.virtual_hub[0].private_ip_address]
 }
 
 resource "azurerm_subnet" "vnet2-subnet" {
@@ -60,7 +60,7 @@ resource "azurerm_virtual_hub_connection" "vnet2-vhub-connection" {
   routing {
     associated_route_table_id = "${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/defaultRouteTable"
     propagated_route_table {
-      labels = ["none"]
+      labels          = ["none"]
       route_table_ids = ["${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/noneRouteTable"]
     }
   }

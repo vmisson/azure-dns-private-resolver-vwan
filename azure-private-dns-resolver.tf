@@ -42,7 +42,7 @@ resource "azurerm_virtual_hub_connection" "dns-vhub-connection" {
   routing {
     associated_route_table_id = "${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/defaultRouteTable"
     propagated_route_table {
-      labels = ["none"]
+      labels          = ["none"]
       route_table_ids = ["${azurerm_virtual_hub.virtual-hub.id}/hubRouteTables/noneRouteTable"]
     }
   }
@@ -80,7 +80,7 @@ resource "azurerm_private_dns_resolver_dns_forwarding_ruleset" "dnsruleset" {
   private_dns_resolver_outbound_endpoint_ids = [azurerm_private_dns_resolver_outbound_endpoint.dns-outboundendpoint.id]
 }
 
-resource "azurerm_private_dns_resolver_virtual_network_link" "link_dnsruleset_dnsvnet" {
+resource "azurerm_private_dns_resolver_virtual_network_link" "link-dnsruleset-dnsvnet" {
   name                      = "link-dns-vnet"
   dns_forwarding_ruleset_id = azurerm_private_dns_resolver_dns_forwarding_ruleset.dnsruleset.id
   virtual_network_id        = azurerm_virtual_network.dns-vnet.id
@@ -120,7 +120,7 @@ resource "azurerm_private_dns_zone" "privatelink-postgres-database-azure-com" {
   resource_group_name = azurerm_resource_group.resource_group.name
 }
 
-resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_postgres_hub" {
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink-postgres-hub" {
   name                  = "link-privatelink-postgres-database-azure-com"
   resource_group_name   = azurerm_resource_group.resource_group.name
   private_dns_zone_name = azurerm_private_dns_zone.privatelink-postgres-database-azure-com.name
