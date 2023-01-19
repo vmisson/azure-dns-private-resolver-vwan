@@ -48,7 +48,6 @@ resource "azurerm_virtual_hub_connection" "dns-vhub-connection" {
   }
 }
 
-
 resource "azurerm_private_dns_resolver" "dnsresolver" {
   name                = "dns-resolver"
   resource_group_name = azurerm_resource_group.resource_group.name
